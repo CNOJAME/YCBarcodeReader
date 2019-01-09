@@ -8,12 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		CD00340721E642610078810C /* YCBarcodeReader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD00340521E642610078810C /* YCBarcodeReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD00341021E642950078810C /* YCBarcodeReaderControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00340D21E642940078810C /* YCBarcodeReaderControllerProtocol.swift */; };
+		CD00341121E642950078810C /* YCBarcodeReaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00340E21E642940078810C /* YCBarcodeReaderDelegate.swift */; };
+		CD00341221E642950078810C /* YCBarcodeReaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00340F21E642950078810C /* YCBarcodeReaderController.swift */; };
+		CD00341621E642DA0078810C /* flashOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD00341421E642DA0078810C /* flashOn@3x.png */; };
+		CD00341721E642DA0078810C /* flashOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD00341521E642DA0078810C /* flashOff@3x.png */; };
+		CD00341B21E642E80078810C /* YCBarcodeReaderViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00341821E642E80078810C /* YCBarcodeReaderViewProtocol.swift */; };
+		CD00341C21E642E80078810C /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00341921E642E80078810C /* FocusView.swift */; };
+		CD00341D21E642E80078810C /* YCBarcodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00341A21E642E80078810C /* YCBarcodeReaderView.swift */; };
+		CD00342121E643230078810C /* TorchButtonPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00341E21E643220078810C /* TorchButtonPosition.swift */; };
+		CD00342221E643230078810C /* YCBarcodeReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00341F21E643220078810C /* YCBarcodeReaderError.swift */; };
+		CD00342321E643230078810C /* TorchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00342021E643230078810C /* TorchMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CD00340221E642610078810C /* YCBarcodeReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YCBarcodeReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD00340521E642610078810C /* YCBarcodeReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YCBarcodeReader.h; sourceTree = "<group>"; };
 		CD00340621E642610078810C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD00340D21E642940078810C /* YCBarcodeReaderControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCBarcodeReaderControllerProtocol.swift; sourceTree = "<group>"; };
+		CD00340E21E642940078810C /* YCBarcodeReaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCBarcodeReaderDelegate.swift; sourceTree = "<group>"; };
+		CD00340F21E642950078810C /* YCBarcodeReaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCBarcodeReaderController.swift; sourceTree = "<group>"; };
+		CD00341421E642DA0078810C /* flashOn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashOn@3x.png"; sourceTree = "<group>"; };
+		CD00341521E642DA0078810C /* flashOff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashOff@3x.png"; sourceTree = "<group>"; };
+		CD00341821E642E80078810C /* YCBarcodeReaderViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCBarcodeReaderViewProtocol.swift; sourceTree = "<group>"; };
+		CD00341921E642E80078810C /* FocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		CD00341A21E642E80078810C /* YCBarcodeReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCBarcodeReaderView.swift; sourceTree = "<group>"; };
+		CD00341E21E643220078810C /* TorchButtonPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchButtonPosition.swift; sourceTree = "<group>"; };
+		CD00341F21E643220078810C /* YCBarcodeReaderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YCBarcodeReaderError.swift; sourceTree = "<group>"; };
+		CD00342021E643230078810C /* TorchMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,9 +69,28 @@
 			isa = PBXGroup;
 			children = (
 				CD00340521E642610078810C /* YCBarcodeReader.h */,
+				CD00340F21E642950078810C /* YCBarcodeReaderController.swift */,
+				CD00340D21E642940078810C /* YCBarcodeReaderControllerProtocol.swift */,
+				CD00340E21E642940078810C /* YCBarcodeReaderDelegate.swift */,
+				CD00341A21E642E80078810C /* YCBarcodeReaderView.swift */,
+				CD00341821E642E80078810C /* YCBarcodeReaderViewProtocol.swift */,
+				CD00341921E642E80078810C /* FocusView.swift */,
+				CD00341F21E643220078810C /* YCBarcodeReaderError.swift */,
+				CD00341E21E643220078810C /* TorchButtonPosition.swift */,
+				CD00342021E643230078810C /* TorchMode.swift */,
+				CD00341321E642DA0078810C /* Resources */,
 				CD00340621E642610078810C /* Info.plist */,
 			);
 			path = YCBarcodeReader;
+			sourceTree = "<group>";
+		};
+		CD00341321E642DA0078810C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CD00341421E642DA0078810C /* flashOn@3x.png */,
+				CD00341521E642DA0078810C /* flashOff@3x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +136,7 @@
 				TargetAttributes = {
 					CD00340121E642610078810C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -120,6 +162,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD00341721E642DA0078810C /* flashOff@3x.png in Resources */,
+				CD00341621E642DA0078810C /* flashOn@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +174,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD00342221E643230078810C /* YCBarcodeReaderError.swift in Sources */,
+				CD00342121E643230078810C /* TorchButtonPosition.swift in Sources */,
+				CD00341D21E642E80078810C /* YCBarcodeReaderView.swift in Sources */,
+				CD00342321E643230078810C /* TorchMode.swift in Sources */,
+				CD00341221E642950078810C /* YCBarcodeReaderController.swift in Sources */,
+				CD00341121E642950078810C /* YCBarcodeReaderDelegate.swift in Sources */,
+				CD00341B21E642E80078810C /* YCBarcodeReaderViewProtocol.swift in Sources */,
+				CD00341021E642950078810C /* YCBarcodeReaderControllerProtocol.swift in Sources */,
+				CD00341C21E642E80078810C /* FocusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +314,7 @@
 		CD00340B21E642610078810C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -277,6 +331,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tfm.YCBarcodeReader;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -285,6 +340,7 @@
 		CD00340C21E642610078810C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
