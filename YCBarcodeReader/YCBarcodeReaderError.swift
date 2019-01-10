@@ -12,4 +12,5 @@ public enum YCBarcodeReaderError: Error {
     case noDeviceError(String)
     case noFlashError(String)
     case noTorchModeError(String)
+    case noAuthorizedToUseCamera(String)
 }

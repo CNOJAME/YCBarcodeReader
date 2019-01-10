@@ -11,6 +11,8 @@ import AVFoundation
 
 open class YCBarcodeReaderView: UIView {
     
+    //MARK: - Properties
+    
     private(set) var controller: YCBarcodeReaderControllerProtocol?
     
     /// Delegate to hadle captured code or get error.
@@ -175,6 +177,8 @@ open class YCBarcodeReaderView: UIView {
         setupOrientationChangedObserver()
     }
     
+    //MARK: - Setup views
+    
     fileprivate func setupViews() {
         backgroundColor = .black
         
@@ -234,6 +238,8 @@ open class YCBarcodeReaderView: UIView {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged(_:)), name: UIDevice.orientationDidChangeNotification, object: UIDevice.current)
     }
+    
+    //MARK: - Actions
     
     @objc private func didPressTorchButton(_ sender: UIButton) {
         controller?.torchMode = controller?.torchMode.next ?? .off
