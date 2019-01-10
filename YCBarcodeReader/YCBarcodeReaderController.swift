@@ -10,14 +10,14 @@ import AVFoundation
 
 class YCBarcodeReaderController: NSObject, YCBarcodeReaderControllerProtocol {
     
+    //MARK: - Properties
+    
     private unowned let view: YCBarcodeReaderViewProtocol
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice? = AVCaptureDevice.default(for: .video)
     
     private var locked = false
-    private var isVisible = true
-    public var isOneTimeSearch = true
     
     weak var delegate: YCBarcodeReaderDelegate? {
         didSet {
@@ -75,35 +75,44 @@ class YCBarcodeReaderController: NSObject, YCBarcodeReaderControllerProtocol {
         stopCapturing()
     }
     
+    //MARK: - Camera setup
+    
     fileprivate func setupCamera() {
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
-        
-        guard let captureDevice = deviceDiscoverySession.devices.first else {
-            lastError = YCBarcodeReaderError.noDeviceError("Failed to get the camera device")
-            return
+        checkPersmission { [weak self] (error) in
+            guard let `self` = self else { return }
+            if error != nil {
+                self.lastError = error
+                return
+            }
+            
+            let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+            
+            guard let captureDevice = deviceDiscoverySession.devices.first else {
+                self.lastError = YCBarcodeReaderError.noDeviceError("Failed to get the camera device")
+                return
+            }
+            
+            do {
+                let input = try AVCaptureDeviceInput(device: captureDevice)
+                self.captureSession.addInput(input)
+                
+                let captureMetadataOutput = AVCaptureMetadataOutput()
+                self.captureSession.addOutput(captureMetadataOutput)
+                captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                captureMetadataOutput.metadataObjectTypes = self.supportedCodeTypes
+            } catch {
+                self.lastError = error
+                return
+            }
+            
+            self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+            self.view.addVideoPreviewLayer(layer: self.videoPreviewLayer!)
+            
+            self.startCapturing()
         }
-        
-        do {
-            let input = try AVCaptureDeviceInput(device: captureDevice)
-            
-            captureSession.addInput(input)
-            
-            let captureMetadataOutput = AVCaptureMetadataOutput()
-            captureSession.addOutput(captureMetadataOutput)
-            
-            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = supportedCodeTypes
-        } catch {
-            lastError = error
-            return
-        }
-        
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        view.addVideoPreviewLayer(layer: videoPreviewLayer!)
-        
-        startCapturing()
     }
+    
+    //MARK: - Actions
     
     func startCapturing() {
         torchMode = .off
@@ -124,7 +133,7 @@ class YCBarcodeReaderController: NSObject, YCBarcodeReaderControllerProtocol {
 extension YCBarcodeReaderController: AVCaptureMetadataOutputObjectsDelegate {
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard !locked && isVisible else { return }
+        guard !locked else { return }
         guard !metadataObjects.isEmpty else { return }
         
         guard
@@ -133,9 +142,7 @@ extension YCBarcodeReaderController: AVCaptureMetadataOutputObjectsDelegate {
             supportedCodeTypes.contains(metadataObj.type)
             else { return }
         
-        if isOneTimeSearch {
-            locked = true
-        }
+        locked = true
         
         var rawType = metadataObj.type.rawValue
         if metadataObj.type == AVMetadataObject.ObjectType.ean13 && code.hasPrefix("0") {
@@ -145,6 +152,35 @@ extension YCBarcodeReaderController: AVCaptureMetadataOutputObjectsDelegate {
         
         stopCapturing()
         delegate?.reader(didReadCode: code, type: rawType)
+    }
+    
+}
+
+extension YCBarcodeReaderController {
+    
+    /// Checks authorization status of the capture device.
+    private func checkPersmission(completion: @escaping (Error?) -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            completion(nil)
+        case .notDetermined:
+            askForPermissions(completion)
+        default:
+            completion(YCBarcodeReaderError.noAuthorizedToUseCamera("Not Authorized To Use Camera"))
+        }
+    }
+    
+    /// Asks for permission to use video.
+    private func askForPermissions(_ completion: @escaping (Error?) -> Void) {
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            DispatchQueue.main.async {
+                guard granted else {
+                    completion(YCBarcodeReaderError.noAuthorizedToUseCamera("Not Authorized To Use Camera"))
+                    return
+                }
+                completion(nil)
+            }
+        }
     }
     
 }
