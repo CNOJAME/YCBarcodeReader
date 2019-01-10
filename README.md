@@ -31,18 +31,19 @@ In any file you'd like to use YCBarcodeReader in, don't forget to import the fra
 2. Create a UIView in interface builder and assign custom class YCBarcodeReaderView.
 ![](https://raw.githubusercontent.com/YuraChudnick/YCBarcodeReader/master/Screenshots/1.png)
 
-3. Setup YCBarcodeReaderView from storyboard/
+3. Setup YCBarcodeReaderView from storyboard.
 ![](https://raw.githubusercontent.com/YuraChudnick/YCBarcodeReader/master/Screenshots/2.png)
 
 In storyboard you can setup:
 - Show/hide torch button;
 - Set position to torch button:
-  | Position      | Parameter         |
-  | ------------- | ----------------- |
-  | Bottom left   | bottomLeft        |
-  | Bottom right  | bottomRight       |
-  | Top left      | topLeft           |
-  | Top Right     | topRight          |
+
+  | Position | Parameter |
+  | --- | --- |
+  | Bottom left | bottomLeft |
+  | Bottom right | bottomRight |
+  | Top left | topLeft |
+  | Top Right | topRight |
 
 - Set edge insets;
 - Change torch button image for on/off mode;
