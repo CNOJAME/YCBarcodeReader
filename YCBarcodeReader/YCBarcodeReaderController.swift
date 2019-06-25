@@ -12,7 +12,7 @@ class YCBarcodeReaderController: NSObject, YCBarcodeReaderControllerProtocol {
     
     //MARK: - Properties
     
-    private unowned let view: YCBarcodeReaderViewProtocol
+    private weak var view: YCBarcodeReaderViewProtocol?
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice? = AVCaptureDevice.default(for: .video)
@@ -106,7 +106,7 @@ class YCBarcodeReaderController: NSObject, YCBarcodeReaderControllerProtocol {
             }
             
             self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-            self.view.addVideoPreviewLayer(layer: self.videoPreviewLayer!)
+            self.view?.addVideoPreviewLayer(layer: self.videoPreviewLayer!)
             
             self.startCapturing()
         }
@@ -118,14 +118,14 @@ class YCBarcodeReaderController: NSObject, YCBarcodeReaderControllerProtocol {
         torchMode = .off
         captureSession.startRunning()
         locked = false
-        view.isTorchButtonHidden = false
+        view?.isTorchButtonHidden = false
     }
     
     func stopCapturing() {
         torchMode = .off
         captureSession.stopRunning()
-        view.isTorchButtonHidden = true
-        view.hideFocusView()
+        view?.isTorchButtonHidden = true
+        view?.hideFocusView()
     }
     
 }
