@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YCBarcodeReader"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "The framework for reading barcodes and qrcodes."
   s.description  = "The framework for reading barcodes and qrcodes. Instructions for installation
   are in [the README](https://github.com/YuraChudnick/YCBarcodeReader)."
